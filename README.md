@@ -66,13 +66,12 @@ Parameter notes:
 * This example shows trimming [linked adapters](https://cutadapt.readthedocs.io/en/stable/guide.html#linked-adapters-combined-5-and-3-adapter) as the amplicon is "framed" by both a 5' and 3' adapter. This is equivalent to usine the -a and -A options in cutadapt and shows the forward primer linked to the reverse complement of the reverse primer and vice versa. The --p-front-f and --p-front-r options may also be used.
 * Number of CPU cores (--p-cores) can be increased up to the number of available cores.
 
-*FIXME: Update with linked primers
 ```
 qiime cutadapt trim-paired \
     --i-demultiplexed-sequences paired-end-demux.qza  \
     --p-cores 1 \
-	  --p-front-f TTGTACACACCGCCC \
-	  --p-front-r CCTTCYGCAGGTTCACCTAC \
+    --p-adapter-f ^TTGTACACACCGCCC...GTAGGTGAACCTGCRGAAGG \
+    --p-adapter-r ^CCTTCYGCAGGTTCACCTAC...GGGCGGTGTGTACAA \
     --p-error-rate 0.1 \
     --p-overlap 3 \
     --verbose \
