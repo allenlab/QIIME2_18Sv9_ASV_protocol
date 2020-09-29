@@ -28,7 +28,7 @@ cd $working_directory
 
 ## Import files
 
-This assumes your data are provided as demultiplexed fastq files with PHRED 33 encoded quality scores. If your data are in a different format, see the [QIIME2 documentation on importing data](https://docs.qiime2.org/2019.10/tutorials/importing/).
+This assumes your data are provided as demultiplexed paired-end fastq files with PHRED 33 encoded quality scores. If your data are in a different format, see the [QIIME2 documentation on importing data](https://docs.qiime2.org/2019.10/tutorials/importing/).
 
 First, generate a fastq manifest file which maps sample IDs to the full path of your fastq files (compressed as fastq.gz is also fine). The manifest is a tab-delimited file (.tsv) with the following headers:
 
@@ -97,7 +97,7 @@ Generate and quantify amplicon sequence variants ASVs with DADA2
 Parameter notes:
 * --p-n-threads is set to 0 which uses all available cores. Adjust accordingly.
 * You may want to adjust the max-ee paramters (number of expected errors) depending on your data.
-* --p-trunc-len-f and --p-trunc-len-r are base on typical read quality profiles we observe with MiSeq 2x150 sequencing. It is highly likely you should adjust these parameters for your own sequencing run. However, DADA2 requires a minimum of 20 nucleotides of overlap.
+* --p-trunc-len-f and --p-trunc-len-r are based on typical read quality profiles we observe with MiSeq 2x150 sequencing. It is highly likely you will need to adjust these parameters for your own sequencing run. However, DADA2 requires a minimum of 20 nucleotides of overlap.
 * If you have a large project that spans multiple sequence runs, run dada2 separately on each run. This is because different runs can have different error profiles (See https://benjjneb.github.io/dada2/bigdata.html). Since ASVs have single nucleotide level resolution, the data can later be merged (see instructions below). If merging data, ensure that your dada2 parameters are consistent. 
 
 ```
