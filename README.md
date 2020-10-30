@@ -229,7 +229,7 @@ From here, you should be able to do additional analyses within QIIME2. If you wo
 ```
 asv_table <- read.delim("asv_table/asv-table.tsv", header=FALSE, row.names=NULL, stringsAsFactors=FALSE, na.strings = "n/a")
 pr2 <- read.delim('./asv_tax_dir/pr2_taxonomy.tsv', header=TRUE, row.names=NULL)
-names(pr2) <- paste("pr2", names(pr2), sep="_")
+names(pr2)[2:3] <- paste("pr2", names(pr2)[2:3], sep="_")
 
 output <- merge(asv_table, pr2, by="Feature.ID")
 
