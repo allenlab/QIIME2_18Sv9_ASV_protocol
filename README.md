@@ -227,9 +227,12 @@ mv asv_tax_dir/taxonomy.tsv asv_tax_dir/pr2_taxonomy.tsv
 From here, you should be able to do additional analyses within QIIME2. If you would like to create an tab-delimited file with your ASV IDs, sample counts, and taxonomic classification, run the following in R:
 
 ```
+# Read in asv table
+## Older versions of QIIME
 asv_table <- read.delim("asv_table/asv-table.tsv", header=FALSE, row.names=NULL, stringsAsFactors=FALSE, na.strings = "n/a")
-pr2 <- read.delim('./asv_tax_dir/pr2_taxonomy.tsv', header=TRUE, row.names=NULL)
-names(pr2)[2:3] <- paste("pr2", names(pr2)[2:3], sep="_")
+# Newer versions of QIIME (tested with 2020.06)
+asv_table <- read.delim("asv_table/asv-table.tsv", header=TRUE, row.names=NULL, stringsAsFactors=FALSE, na.strings = "n/a", skip = 1)
+names(asv_table)[1] <- "Feature.ID"
 
 output <- merge(asv_table, pr2, by="Feature.ID")
 
