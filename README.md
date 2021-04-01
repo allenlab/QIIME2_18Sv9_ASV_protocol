@@ -10,7 +10,7 @@ We normally but not exclusively generate these libraries from DNA and RNA extrac
 
 ## Requirements
 * [QIIME2 Version 2019.10](https://docs.qiime2.org/2019.10/) or higher
-* [PR2 database version 4.12.0](https://pr2-database.org/) or higher
+* [PR2 database version 4.13.0](https://pr2-database.org/) or higher
 
 ## Important Notes
 * This is a generic protocol. We often append a unique project ID to the beginning of all filenames throughout.
@@ -184,27 +184,27 @@ Import the sequence and taxonomy information. Select the region between the prim
 ```
 qiime tools import \
   --type 'FeatureData[Sequence]' \
-  --input-path ./db/pr2/pr2_version_4.12.0_18S_mothur.fasta  \
-  --output-path ./db/pr2/pr2_v4.12.0.qza
+  --input-path ./db/pr2/pr2_version_4.13.0_18S_mothur.fasta  \
+  --output-path ./db/pr2/pr2_v4.13.0.qza
 
 # import taxonomy
 qiime tools import \
   --type 'FeatureData[Taxonomy]' \
   --input-format HeaderlessTSVTaxonomyFormat \
-  --input-path ./db/pr2/pr2_version_4.12.0_18S_mothur.tax \
-  --output-path ./db/pr2/pr2_v4.12.0_tax.qza
+  --input-path ./db/pr2/pr2_version_4.13.0_18S_mothur.tax \
+  --output-path ./db/pr2/pr2_v4.13.0_tax.qza
 
 qiime feature-classifier extract-reads \
-  --i-sequences ./db/pr2/pr2_v4.12.0.qza \
+  --i-sequences ./db/pr2/pr2_v4.13.0.qza \
   --p-f-primer TTGTACACACCGCCC \
   --p-r-primer CCTTCYGCAGGTTCACCTAC \
-  --o-reads ./db/pr2/pr2_v4.12.0_v9_extracts.qza
+  --o-reads ./db/pr2/pr2_v4.13.0_v9_extracts.qza
 
 # Train the classifier
 qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads ./db/pr2/pr2_v4.12.0_v9_extracts.qza \
-  --i-reference-taxonomy ./db/pr2/pr2_v4.12.0_tax.qza \
-  --o-classifier ./db/pr2/pr2_v4.12.0_v9_classifier.qza
+  --i-reference-reads ./db/pr2/pr2_v4.13.0_v9_extracts.qza \
+  --i-reference-taxonomy ./db/pr2/pr2_v4.13.0_tax.qza \
+  --o-classifier ./db/pr2/pr2_v4.13.0_v9_classifier.qza
 ```
 
 Classify ASVs. The option --p-n-jobs -1 uses the all CPUs. Adjust accordingly:
@@ -212,7 +212,7 @@ Classify ASVs. The option --p-n-jobs -1 uses the all CPUs. Adjust accordingly:
 ```
 qiime feature-classifier classify-sklearn \
   --p-n-jobs -1 \
-  --i-classifier ../db/pr2/pr2_v4.12.0_v9_classifier.qza \
+  --i-classifier ../db/pr2/pr2_v4.13.0_v9_classifier.qza \
   --i-reads merged_rep-seqs.qza \
   --o-classification merged_asv_tax_sklearn.qza
 
